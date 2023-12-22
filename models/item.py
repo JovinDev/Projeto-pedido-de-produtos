@@ -1,7 +1,7 @@
 import json
 
 class Item:
-    def __init__(self, id, nome, descricao, preco, quantidade, id_produto):
+    def __init__(self, id, nome, descricao, preco, quantidade, id_produto, id_pedido):
         if nome == "": raise ValueError("Título inválido")
         if preco <= 0.00: raise ValueError("preco inválido")
         if descricao == "": raise ValueError("Descrição inválida")
@@ -12,6 +12,7 @@ class Item:
         self.set_descricao(descricao)
         self.set_quantidade(quantidade)
         self.__id_produto = id_produto
+        self.__id_produto = id_pedido
         
 
     def get_id(self): return self.__id
@@ -76,18 +77,20 @@ class NItem:
     def abrir(cls):
         cls.__produtos = []
         try:
-            with open("produtos.json", mode="r") as arquivo:
+            with open("itens.json", mode="r") as arquivo:
                 produtos_json = json.load(arquivo)
                 for obj in produtos_json:
-                    aux = Item(obj["Item_id"], 
-                                  obj["Item_nome"],
-                                  obj["Item_descricao"],
-                                  obj["Item_preco"])
+                    aux = Item(obj["_Item__id"], 
+                                  obj["_Item__id_produto"],
+                                  obj["_Item__nome"],
+                                  obj["_Item__descricao"],
+                                  obj["_Item__preco"],
+                                  obj["_Item__quantidade"]),
                     cls.__produtos.append(aux)
         except FileNotFoundError:
             pass
 
     @classmethod
     def salvar(cls):
-        with open("produtos.json", mode="w") as arquivo:
+        with open("itens.json", mode="w") as arquivo:
             json.dump(cls.__produtos, arquivo, default=vars)
