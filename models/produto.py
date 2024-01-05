@@ -1,23 +1,23 @@
 import json
 
 class Produto:
-  def __init__(self, id, nome, preco, descricao, estoque, disponivel):
+  def __init__(self, id, nome, preco, descricao, qtd, disponivel):
     if nome == "": raise ValueError(" inválido")
     if preco <= 0.00: raise ValueError("preco inválido")
     if descricao == "": raise ValueError("Descrição inválida")
-    if estoque <= 0: raise ValueError("Estoque inválido")
+    if qtd <= 0: raise ValueError("Quantidade inválido")
     self.set_id(id)
     self.set_nome(nome)
     self.set_preco(preco)
     self.set_descricao(descricao)
-    self.set_estoque(estoque)
+    self.set_qtd(qtd)
     self.set_disponivel(disponivel)
 
   def get_id(self): return self.__id
   def get_nome(self): return self.__nome
   def get_preco(self): return self.__preco
   def get_descricao(self): return self.__descricao
-  def get_estoque(self): return self.__estoque
+  def get_qtd(self): return self.__qtd
   def get_disponivel(self): return self.__disponivel
 
   def set_id(self, id): self.__id = id
@@ -30,20 +30,31 @@ class Produto:
   def set_descricao(self, descricao): 
     if descricao == "": raise ValueError("Descrição inválido")
     self.__descricao = descricao
-  def set_estoque(self, estoque): self.__estoque = estoque
+  def set_qtd(self, qtd):
+    if qtd <= 0.00: raise ValueError("quantidade inválida")
+    self.__qtd = qtd
   def set_disponivel(self, disponivel): self.__disponivel = disponivel
 
   def __eq__(self, x):
-    if self.__id == x.__id and self.__nome == x.__nome and self.__preco == x.__preco and self.__descricao == x.__descricao and self.__estoque == x.__estoque and self.__disponivel == x.__disponivel:
+    if self.__id == x.__id and self.__nome == x.__nome and self.__preco == x.__preco and self.__descricao == x.__descricao and self.__qtd == x.__qtd and self.__disponivel == x.__disponivel:
       return True
     return False
 
   def __str__(self):
-    return f"{self.__id} - {self.__nome} - {self.__preco} - {self.__descricao} - {self.__estoque} - {self.__disponivel}"
+    return f"{self.__id} - {self.__nome} - {self.__preco} - {self.__descricao} - {self.__qtd} - {self.__disponivel}"
 
 class NProduto:
   __produtos = []
 
+  @classmethod
+  def inserir(cls, obj):
+    cls.abrir()
+    id = 0
+    for aux in cls.__produtos:
+            if aux.get_id() > id: id = aux.get_id()
+    obj.set_id(id + 1)
+    cls.__produtos.append(obj)
+    cls.salvar()
 
   @classmethod
   def listar(cls):
@@ -65,8 +76,7 @@ class NProduto:
       aux.set_nome(obj.get_nome())
       aux.set_preco(obj.get_preco())
       aux.set_descricao(obj.get_descricao())
-      aux.set_estoque(obj.get_estoque())
-      aux.set_disponivel(obj.get_disponivel())
+      aux.set_qtd(obj.get_qtd())
       cls.salvar()
 
   @classmethod
