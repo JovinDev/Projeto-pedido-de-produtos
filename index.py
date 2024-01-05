@@ -2,14 +2,16 @@ from templates.manterclienteUI import ManterClienteUI
 from templates.manterprodutoUI import ManterProdutoUI
 from templates.manterpedidoUI import ManterPedidoUI
 from templates.manteritemUI import ManterItemUI
+
 from templates.loginUI import LoginUI
 from templates.cadastroUI import CadastroUI
 from templates.editarperfilUI import EditarPerfilUI
+
 from templates.realizarpedidoUI import RealizarPedidoUI
 from templates.meuspedidosUI import VisualizarPedidosUI
 from templates.buscarusuarioUI import BuscarPedidoUsuarioUI
-from views import View
 
+from views import View
 import streamlit as st
 
 class IndexUI:
@@ -55,3 +57,6 @@ class IndexUI:
     IndexUI.sidebar()
 
 IndexUI.main()
+
+
+
