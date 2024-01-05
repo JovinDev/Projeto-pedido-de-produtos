@@ -1,21 +1,20 @@
 import streamlit as st
 import pandas as pd
 from views import View
-import time
 
 class RealizarPedidoUI:
   def main():
     st.header("Produtos disponiveis")
-    RealizarPedidoUI.listar_produto()
+    RealizarPedidoUI.listar_produtos()
     RealizarPedidoUI.realizar_pedido()
 
-  def produtos_produtos():
-    agendas = View.listar_produtos_nao_alugados()
-    if len(agendas) == 0:
-      st.write("Nenhum horário cadastrado")
+  def listar_produtos():
+    produtos = View.listar_produtos_nao_disponiveis()
+    if len(produtos) == 0:
+      st.write("Nenhum produto disponivel")
     else:
       dic = []
-      for obj in agendas: dic.append(obj.__dict__)
+      for obj in produtos: dic.append(obj.__dict__)
       df = pd.DataFrame(dic)
       st.dataframe(df)
 
@@ -25,9 +24,8 @@ class RealizarPedidoUI:
     produto = st.selectbox("Selecione o produto", produtos)
     if st.button("Realizar Pedido"):
       try:
-        View.Pedido_inserir( "", id, produto.get_id())
+        View.Pedido_inserir( "", id, produto.get_id ())
         st.success("Pedido realizado com sucesso")
-        time.sleep(2)
         st.rerun()
       except ValueError as error:
         st.error(f"Erro: {error}")
