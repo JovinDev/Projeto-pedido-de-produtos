@@ -1,33 +1,28 @@
 import json
 
 class Item:
-    def __init__(self, id, id_produto, id_pedido, preco, quantidade ):
+    def __init__(self, id, id_produto, id_pedido, preco, qtd ):
         if preco <= 0.00: raise ValueError("preco inválido")
-        if quantidade <= 0: raise ValueError("Quantidade inválida")
+        if qtd <= 0: raise ValueError("Quantidade inválida")
         self.set_id(id)
         self.set_preco(preco)
-        self.set_quantidade(quantidade)
+        self.set_qtd(qtd)
         self.__id_produto = id_produto
         self.__id_pedido = id_pedido
         
 
     def get_id(self): return self.__id
     def get_preco(self): return self.__preco
-    def get_quantidade(self): return self.__quantidade
+    def get_qtd(self): return self.__qtd
     def get_id_produto(self): return self.__id_produto
     def get_id_pedido(self): return self.__id_pedido
-
     def set_id(self, id): self.__id = id
-    def set_nome(self, nome):
-        if nome == "": raise ValueError("Nome inválido")
-        self.__nome = nome
     def set_preco(self, preco):
         if preco <= 0.00: raise ValueError("Preço inválido")
         self.__preco = preco 
-    def set_descricao(self, descricao): 
-        if descricao == "": raise ValueError("Descrição inválido")
-        self.__descricao = descricao
-    def set_quantidade(self, quantidade): self.__quantidade = quantidade
+    def set_qtd(self, qtd):
+       if qtd <= 0: raise ValueError("Quantidade inválida")
+       self.__qtd = qtd
     def set_id_produto(self, id_produto): self.__id_produto = id_produto
     def set_id_pedido(self, id_pedido): self.__id_produto = id_pedido
 

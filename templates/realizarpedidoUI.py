@@ -24,7 +24,7 @@ class RealizarPedidoUI:
     produto = st.selectbox("Selecione o produto", produtos)
     if st.button("Realizar Pedido"):
       try:
-        View.Pedido_inserir( "", id, produto.get_id ())
+        View.pedido_inserir( "", id, produto.get_id ())
         st.success("Pedido realizado com sucesso")
         st.rerun()
       except ValueError as error:
