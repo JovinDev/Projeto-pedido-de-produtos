@@ -4,7 +4,7 @@ from views import View
 
 class ManterPedidoUI:
   def main():
-    st.header("Cadastro de Produtos")
+    st.header("Gerenciamento de pedidos")
     tab1, tab2, tab3, tab4 = st.tabs(["Listar", "Inserir", "Atualizar", "Excluir"])
     with tab1: ManterPedidoUI.listar()
     with tab2: ManterPedidoUI.inserir()
@@ -24,9 +24,11 @@ class ManterPedidoUI:
     cliente = st.selectbox("Selecione o cliente", clientes)
     produtos = View.produto_listar()
     produto = st.selectbox("Selecione o produto", produtos)
+    itens = View.itens_listar()
+    produto = st.selectbox("Selecione a quantidade de produtos que você quer")
     if st.button("Inserir"):
       try:
-        View.pedido_inserir( "", cliente.get_id(), produto.get_id())
+        View.pedido_inserir( "", cliente.get_id(), produto.get_id(), produto.get_qtd())
         st.success("pedido inserido com sucesso")
         st.rerun()
       except ValueError as error:
