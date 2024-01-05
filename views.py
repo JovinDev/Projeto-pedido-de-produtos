@@ -47,22 +47,22 @@ class View:
   def produto_listar_id(id):
     return NProduto.listar_id(id)
    
- 
-
-  def item_inserir(id_produto, nome, descricao, preco, disponivel):
+  def produto_inserir(id_produto, nome, descricao, preco, qtd):
     if nome == "": raise ValueError("Nome vazio")
     if descricao == "": raise ValueError("Descrição vazia")
-    if preco <= 0.00: raise ValueError("Preço invalido")
-    NItem.inserir(Item(0, id_produto, nome, descricao, preco, disponivel))
+    if preco == 0.00: raise ValueError("Preço invalido")
+    if qtd <= 0.00: raise ValueError("Quantidade invalida")
+    NProduto.inserir(Item(0, id_produto, nome, descricao, preco, qtd))
 
-  def item_excluir(id):
+  def produto_excluir(id):
     NItem.excluir(Item(id, "", "", 0))
 
-  def produto_atualizar(id, nome, descricao, preco, disponivel):
+  def produto_atualizar(id, nome, descricao, preco, qtd):
     if nome == "": raise ValueError("Nome vazio")
     if descricao == "": raise ValueError("Descrição vazia")
     if preco <= 0.00: raise ValueError("Preço invalido")
-    NProduto.atualizar(Produto(id, nome, descricao, preco, disponivel))
+    if qtd <= 0.00: raise ValueError("Quantidade invalida")
+    NProduto.atualizar(Produto(id, nome, descricao, preco, qtd))
 
  
 
@@ -106,14 +106,14 @@ class View:
         else:
           raise ValueError("Produto indisponivel")
 
-  def pedido_atualizar(id, entrega, devolucao, id_cliente, id_Produto):
+  def pedido_atualizar(id, id_cliente, id_Produto):
     produtos = NProduto.listar()
     for produto in produtos:
       if id_Produto == produto.get_id():
         if produto.get_disponivel() == False:
           produto.set_disponivel(True)
           NProduto.atualizar(produto)
-          NPedido.atualizar(Pedido(id, entrega, devolucao, id_cliente, id_Produto))
+          NPedido.atualizar(Pedido(id, id_cliente, id_Produto))
           return
         else:
           raise ValueError("Produto indisponivel")
@@ -124,12 +124,11 @@ class View:
   def editar_perfil(id, nome, email, fone, senha):
     NCliente.atualizar(Cliente(id, nome, email, fone, senha))
 
-  def meus_pedidos(datainicial, datafinal, idcliente):
+  def meus_pedidos( idcliente):
     pedidos = []
     
     for pedido in View.pedido_listar_normal():
         if pedido.get_id_cliente() == idcliente:
-            if datainicial <= Pedido.get_entrega() <= datafinal:
                 pedidos.append(Pedido)
     
     return pedidos
@@ -151,7 +150,7 @@ class View:
 
         return produtos_encontrados
   
-  def buscar_Pedido_usuario(pedido_cliente):
+  def buscar_pedido_usuario(pedido_cliente):
       pedidos = View.pedido_listar_normal()
       resultado = []
       for pedido in pedidos:
@@ -164,7 +163,7 @@ class View:
   def meus_produtos_de_agora(id_cliente):
      produtos = []
      for pedido in View.pedido_listar_normal():
-       if pedido.get_id_cliente() == id_cliente and pedido.get_devolucao() == "":
+       if pedido.get_id_cliente() == id_cliente:
          for produto in View.produto_listar():
            if produto.get_id() == pedido.get_id_produto() and produto.get_disponivel() == True:
              produtos.append(produto)
