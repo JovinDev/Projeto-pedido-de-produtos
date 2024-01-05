@@ -10,7 +10,7 @@ class VisualizarPedidosUI:
     def listar_pedidos():
         
         if st.button("Visualizar"):
-            pedidos = View.meus_Pedidos(st.session_state["cliente_id"])
+            pedidos = View.meus_pedidos(st.session_state["cliente_id"])
             
             if len(pedidos) == 0:
                 st.write("Nenhuma Pedidos cadastrado")
