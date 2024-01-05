@@ -19,7 +19,7 @@ class ManterProdutoUI:
     qtd = st.text_input("Quantas unidades desse produto existem?")
     if st.button("Inserir"):
       try:
-        View.produto_inserir(nome, descricao, float(preco), int(qtd), False)
+        View.produto_inserir(0, nome, descricao, float(preco), int(qtd))
         st.success("produto inserido com sucesso")
         st.rerun()
       except ValueError as error:

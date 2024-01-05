@@ -24,8 +24,8 @@ class ManterPedidoUI:
     cliente = st.selectbox("Selecione o cliente", clientes)
     produtos = View.produto_listar()
     produto = st.selectbox("Selecione o produto", produtos)
-    itens = View.itens_listar()
-    produto = st.selectbox("Selecione a quantidade de produtos que você quer")
+    produtos = View.produto_listar()
+    produto = st.write("Selecione a quantidade de produtos que você quer")
     if st.button("Inserir"):
       try:
         View.pedido_inserir( "", cliente.get_id(), produto.get_id(), produto.get_qtd())
