@@ -1,26 +1,21 @@
 import json
 
 class Item:
-    def __init__(self, id, nome, descricao, preco, quantidade, id_produto, id_pedido):
-        if nome == "": raise ValueError("Título inválido")
+    def __init__(self, id, id_produto, id_pedido, preco, quantidade ):
         if preco <= 0.00: raise ValueError("preco inválido")
-        if descricao == "": raise ValueError("Descrição inválida")
         if quantidade <= 0: raise ValueError("Quantidade inválida")
         self.set_id(id)
-        self.set_nome(nome)
         self.set_preco(preco)
-        self.set_descricao(descricao)
         self.set_quantidade(quantidade)
         self.__id_produto = id_produto
-        self.__id_produto = id_pedido
+        self.__id_pedido = id_pedido
         
 
     def get_id(self): return self.__id
-    def get_nome(self): return self.__nome
     def get_preco(self): return self.__preco
-    def get_descricao(self): return self.__descricao
     def get_quantidade(self): return self.__quantidade
     def get_id_produto(self): return self.__id_produto
+    def get_id_pedido(self): return self.__id_pedido
 
     def set_id(self, id): self.__id = id
     def set_nome(self, nome):
@@ -34,6 +29,7 @@ class Item:
         self.__descricao = descricao
     def set_quantidade(self, quantidade): self.__quantidade = quantidade
     def set_id_produto(self, id_produto): self.__id_produto = id_produto
+    def set_id_pedido(self, id_pedido): self.__id_produto = id_pedido
 
     def __eq__(self, x):
      if self.__id == x.__id and self.__nome == x.__titulo and self.__descricao == x.__descricao and self.__preco == x.__preco and self.__quantidade == x.__quantidade:
@@ -77,20 +73,18 @@ class NItem:
     def abrir(cls):
         cls.__produtos = []
         try:
-            with open("itens.json", mode="r") as arquivo:
+            with open("produtos.json", mode="r") as arquivo:
                 produtos_json = json.load(arquivo)
                 for obj in produtos_json:
-                    aux = Item(obj["_Item__id"], 
-                                  obj["_Item__id_produto"],
-                                  obj["_Item__nome"],
-                                  obj["_Item__descricao"],
-                                  obj["_Item__preco"],
-                                  obj["_Item__quantidade"]),
+                    aux = Item(obj["Item_id"], 
+                                  obj["Item_nome"],
+                                  obj["Item_descricao"],
+                                  obj["Item_preco"])
                     cls.__produtos.append(aux)
         except FileNotFoundError:
             pass
 
     @classmethod
     def salvar(cls):
-        with open("itens.json", mode="w") as arquivo:
+        with open("produtos.json", mode="w") as arquivo:
             json.dump(cls.__produtos, arquivo, default=vars)
