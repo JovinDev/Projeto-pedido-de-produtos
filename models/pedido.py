@@ -18,6 +18,10 @@ class Pedido:
     if self.__id == x.__id and self.__id_cliente == x.__id_cliente and self.__id_produto == x.__id_produto:
       return True
     return False
+  
+  def __str__(self):
+    return f"{self.__id} - {self.__id_cliente} - {self.__id_produto}"
+
 
 
 class NPedido:
