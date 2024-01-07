@@ -1,7 +1,6 @@
 from templates.manterclienteUI import ManterClienteUI
 from templates.manterprodutoUI import ManterProdutoUI
 from templates.manterpedidoUI import ManterPedidoUI
-from templates.manteritemUI import ManterItemUI
 
 from templates.loginUI import LoginUI
 from templates.cadastroUI import CadastroUI
@@ -22,19 +21,18 @@ class IndexUI:
     if op == "Abrir Conta": CadastroUI.main()
 
   def menu_admin():
-    op = st.sidebar.selectbox("Menu", ["Manter Pedido", "Manter Clientes", "Manter Produtos", "Manter Itens", "Editar Perfil", "Buscar Pedidos de Usuário"])
-    if op == "Manter Pedido": ManterPedidoUI.main()
-    if op == "Manter Clientes": ManterClienteUI.main()
-    if op == "Manter Produtos": ManterProdutoUI.main()
-    if op == "Manter Itens": ManterItemUI.main()
-    if op == "Editar Perfil": EditarPerfilUI.main()
-    if op == "Buscar Pedidos de Usuário": BuscarPedidoUsuarioUI.main()
+    op = st.sidebar.selectbox("Menu", ["Manter pedido", "Manter clientes", "Manter produtos", "Editar perfil", "Buscar pedidos de usuário"])
+    if op == "Manter pedido": ManterPedidoUI.main()
+    if op == "Manter clientes": ManterClienteUI.main()
+    if op == "Manter produtos": ManterProdutoUI.main()
+    if op == "Editar perfil": EditarPerfilUI.main()
+    if op == "Buscar pedidos de usuário": BuscarPedidoUsuarioUI.main()
 
   def menu_cliente():
-    op = st.sidebar.selectbox("Menu", [ "Editar Perfil", "Realizar um Pedidos", "Meus Pedidos",])
-    if op == "Editar Perfil": EditarPerfilUI.main()
-    if op == "Realizar um Pedidos": RealizarPedidoUI.main()
-    if op == "Meus Pedidos": VisualizarPedidosUI.main()
+    op = st.sidebar.selectbox("Menu", [ "Editar perfil", "Realizar um pedido", "Meus pedidos",])
+    if op == "Editar perfil": EditarPerfilUI.main()
+    if op == "Realizar um pedido": RealizarPedidoUI.main()
+    if op == "Meus pedidos": VisualizarPedidosUI.main()
 
   def btn_logout():
     if st.sidebar.button("Logout"):

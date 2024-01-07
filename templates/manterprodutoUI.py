@@ -29,13 +29,13 @@ class ManterProdutoUI:
   def excluir():
     produtos = View.produto_listar()
     if len(produtos) == 0:
-      st.write("Nenhuma produto disponível")
+      st.write("Nenhum produto disponível")
     else:  
       op = st.selectbox("Exclusão de Produtos", produtos)
       if st.button("Excluir"):
         id = op.get_id()
         View.produto_excluir(id)
-        st.success("produto excluído com sucesso")
+        st.success("Produto excluído com sucesso")
         st.rerun()
 
   def listar():
@@ -55,8 +55,8 @@ class ManterProdutoUI:
     else:  
       op = st.selectbox("Atualização de Produtos", produtos)
       nome = st.text_input("Informe o novo nome do Produto", op.get_nome())
-      preco = st.text_input("Informe a nova preço do Produto", op.get_preco())
-      descricao = st.text_input("Informe o novo descricao do Produto", op.get_descricao())
+      preco = st.text_input("Informe a novo preço do Produto", op.get_preco())
+      descricao = st.text_input("Informe a nova descricao do Produto", op.get_descricao())
       qtd = st.text_input("Quantas unidades desse produto existem?", op.get_qtd())
       if st.button("Atualizar"):
         try:
