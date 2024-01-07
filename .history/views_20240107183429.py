@@ -2,6 +2,7 @@ from models.cliente import Cliente, NCliente
 from models.produto import Produto, NProduto
 from models.pedido import Pedido, NPedido
 from models.item import Item, NItem
+import streamlit as st
 
 
 class View:

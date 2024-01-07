@@ -28,7 +28,7 @@ class RealizarPedidoUI:
     
     if st.button("Realizar Pedido"):
       try:
-        View.pedido_inserir(0, id, produto.get_id(), int(quantidade), produto.get_preco())
+        View.pedido_inserir(0, id, produto.get_id(), int(quantidade, produto.get_preco())
         st.success("Pedido realizado com sucesso")
         st.rerun()
       except ValueError as error:

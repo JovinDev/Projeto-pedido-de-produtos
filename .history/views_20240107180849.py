@@ -4,6 +4,7 @@ from models.pedido import Pedido, NPedido
 from models.item import Item, NItem
 
 
+
 class View:
   def cliente_inserir(nome, email, fone, senha):
     cliente = Cliente(0, nome, email, fone, senha)
@@ -83,7 +84,7 @@ class View:
     for pedido in pedidos:
       cliente = View.cliente_listar_id(pedido.get_id_cliente())
       produto = View.produto_listar_id(pedido.get_id_produto())
-      dicstr = pedido.__str__() + " - " + cliente.get_nome() + " - " + produto.get_nome()
+      dicstr = pedido.to_str() + " - " + cliente.get_nome() + " - " + produto.get_nome()
       lista.append(dicstr)
 
     return lista
@@ -96,18 +97,17 @@ class View:
     for produto in produtos:
       if id_Produto == produto.get_id():
           NPedido.inserir(Pedido(id, id_cliente, id_Produto, qtd_itens, val_unit*qtd_itens))
-          if produto.get_qtd() < qtd_itens or qtd_itens < 1: raise ValueError("Quantidade inválida")
-          View.produto_atualizar(id_Produto, produto.get_nome(), produto.get_preco(), produto.get_descricao(), produto.get_qtd() - qtd_itens)
+          produto.set_
           return
       else:
           raise ValueError("Produto indisponivel")
 
-  def pedido_atualizar(id, id_cliente, id_Produto, qtd_itens, val_total):
+  def pedido_atualizar(id, id_cliente, id_Produto):
     produtos = NProduto.listar()
     for produto in produtos:
       if id_Produto == produto.get_id():
           NProduto.atualizar(produto)
-          NPedido.atualizar(Pedido(id, id_cliente, id_Produto, qtd_itens, val_total))
+          NPedido.atualizar(Pedido(id, id_cliente, id_Produto))
           return
       else:
           raise ValueError("Produto indisponivel")

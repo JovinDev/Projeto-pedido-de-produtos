@@ -2,6 +2,7 @@ from models.cliente import Cliente, NCliente
 from models.produto import Produto, NProduto
 from models.pedido import Pedido, NPedido
 from models.item import Item, NItem
+import streamlit as st
 
 
 class View:
@@ -68,6 +69,7 @@ class View:
 
   def pedido_listar():
     pedidos = NPedido.listar()
+    st.write(pedidos)
     lista = []
     for pedido in pedidos:
       cliente = View.cliente_listar_id(pedido.get_id_cliente())
@@ -83,7 +85,7 @@ class View:
     for pedido in pedidos:
       cliente = View.cliente_listar_id(pedido.get_id_cliente())
       produto = View.produto_listar_id(pedido.get_id_produto())
-      dicstr = pedido.__str__() + " - " + cliente.get_nome() + " - " + produto.get_nome()
+      dicstr = pedido.to_str() + " - " + cliente.get_nome() + " - " + produto.get_nome()
       lista.append(dicstr)
 
     return lista

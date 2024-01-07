@@ -82,8 +82,8 @@ class NPedido:
                 pedidos_json = json.load(arquivo)
                 for obj in pedidos_json:
                     aux = Pedido( obj["id"], 
-                                  obj["id_cliente"],
                                   obj["id_produto"],
+                                  obj["id_cliente"],
                                   obj["qtd_itens"],
                                   obj["valor_total"])
                     cls.__Pedidos.append(aux)

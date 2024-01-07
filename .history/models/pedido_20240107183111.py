@@ -22,7 +22,7 @@ class Pedido:
   def set_valor_total(self, valor_total): self.__valor_total = valor_total
   
   def __str__(self):
-    return f"{self.__id} - Cliente: {self.__id_cliente} - Produto: {self.__id_produto} - Itens {self.__qtd_itens} - Valor {self.__valor_total}"
+    return f"{self.__id} - Cliente: {self.__id_cliente} - {self.__id_produto}"
   
   def to_json(self):
      return {
@@ -82,8 +82,8 @@ class NPedido:
                 pedidos_json = json.load(arquivo)
                 for obj in pedidos_json:
                     aux = Pedido( obj["id"], 
-                                  obj["id_cliente"],
                                   obj["id_produto"],
+                                  obj["id_cliente"],
                                   obj["qtd_itens"],
                                   obj["valor_total"])
                     cls.__Pedidos.append(aux)

@@ -24,11 +24,11 @@ class RealizarPedidoUI:
     produto = st.selectbox("Selecione o produto", produtos)
     if produto is not None:
       st.write(f"Quantidade disponível: {produto.get_qtd()}")
-      quantidade = st.text_input("Quantidade para pedido:")
+      quantidade = st.number_input("Quantidade para pedido:")
     
     if st.button("Realizar Pedido"):
       try:
-        View.pedido_inserir(0, id, produto.get_id(), int(quantidade), produto.get_preco())
+        View.pedido_inserir(0, id, produto.get_id(), quantidade, produto.get_preco())
         st.success("Pedido realizado com sucesso")
         st.rerun()
       except ValueError as error:
