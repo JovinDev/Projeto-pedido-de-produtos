@@ -1,0 +1,35 @@
+import streamlit as st
+import pandas as pd
+from views import View
+
+class RealizarPedidoUI:
+  def main():
+    st.header("Produtos disponiveis")
+    RealizarPedidoUI.listar_produtos()
+    RealizarPedidoUI.realizar_pedido()
+
+  def listar_produtos():
+    produtos = View.produto_listar()
+    if len(produtos) == 0:
+      st.write("Nenhum produto disponivel")
+    else:
+      dic = []
+      for obj in produtos: dic.append(obj.__dict__)
+      df = pd.DataFrame(dic)
+      st.dataframe(df)
+
+  def realizar_pedido():
+    id = st.session_state["cliente_id"]
+    produtos = View.produto_listar()
+    produto = st.selectbox("Selecione o produto", produtos)
+    
+    if st.button("Realizar Pedido"):
+      try:
+<<<<<<< HEAD
+        View.pedido_inserir(0, id, produto.get_id())
+=======
+>>>>>>> d149af7eb10e16101ce04646e0faaacb06c12bef
+        st.success("Pedido realizado com sucesso")
+        st.rerun()
+      except ValueError as error:
+        st.error(f"Erro: {error}")

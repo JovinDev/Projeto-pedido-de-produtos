@@ -17,7 +17,8 @@ class Pedido:
   
   def __str__(self):
     return f"{self.__id} - {self.__id_cliente} - {self.__id_produto}"
-  
+<<<<<<< HEAD
+    
   def to_json(self):
      return {
         "id": self.__id,
@@ -84,3 +85,4 @@ class NPedido:
   def salvar(cls):
     with open("pedidos.json", mode="w") as arquivo:
       json.dump(cls.__Pedidos, arquivo, default=Pedido.to_json)
+=======

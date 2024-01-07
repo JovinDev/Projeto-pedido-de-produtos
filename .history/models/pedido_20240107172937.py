@@ -17,13 +17,24 @@ class Pedido:
   
   def __str__(self):
     return f"{self.__id} - {self.__id_cliente} - {self.__id_produto}"
-  
+<<<<<<< HEAD
+    
   def to_json(self):
      return {
         "id": self.__id,
         "id_cliente": self.__id_cliente,
         "id_produto": self.__id_produto
      }
+=======
+  
+  def to_json(self):
+         return {
+            "id": self.__id,
+            "idCliente": self.__id_cliente,
+            "idProduto": self.__id_produto
+        }
+
+>>>>>>> d149af7eb10e16101ce04646e0faaacb06c12bef
 
 class NPedido:
   __Pedidos = []
@@ -68,6 +79,7 @@ class NPedido:
 
   @classmethod
   def abrir(cls):
+<<<<<<< HEAD
         cls.__Pedidos = []
         try:
             with open("pedidos.json", mode="r") as arquivo:
@@ -76,6 +88,7 @@ class NPedido:
                     aux = Pedido( obj["id"], 
                                   obj["id_produto"],
                                   obj["id_cliente"])
+<<<<<<< HEAD
                     cls.__Pedidos.append(aux)
         except FileNotFoundError:
             pass
@@ -83,4 +96,6 @@ class NPedido:
   @classmethod
   def salvar(cls):
     with open("pedidos.json", mode="w") as arquivo:
+<<<<<<< HEAD
       json.dump(cls.__Pedidos, arquivo, default=Pedido.to_json)
+=======

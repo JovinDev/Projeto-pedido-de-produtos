@@ -73,7 +73,7 @@ class View:
     for pedido in pedidos:
       cliente = View.cliente_listar_id(pedido.get_id_cliente())
       Produto = View.produto_listar_id(pedido.get_id_produto())
-      dic = {"ID Locação": pedido.get_id(), "Cliente": cliente.get_nome(), "Produto": Produto.get_nome()}
+      dic = {"ID pedido": pedido.get_id(), "Cliente": cliente.get_nome(), "Produto": Produto.get_nome()}
       lista.append(dic)
 
     return lista
@@ -92,7 +92,7 @@ class View:
   def pedido_listar_id(id):
     return NPedido.listar_id(id)
 
-  def pedido_inserir(id, id_cliente, id_Produto):
+  def pedido_inserir( id, id_cliente, id_Produto):
     produtos = View.produto_listar()
     for produto in produtos:
       if id_Produto == produto.get_id():
