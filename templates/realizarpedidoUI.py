@@ -9,7 +9,7 @@ class RealizarPedidoUI:
     RealizarPedidoUI.realizar_pedido()
 
   def listar_produtos():
-    produtos = View.listar_produtos_nao_disponiveis()
+    produtos = View.produto_listar()
     if len(produtos) == 0:
       st.write("Nenhum produto disponivel")
     else:
@@ -19,12 +19,13 @@ class RealizarPedidoUI:
       st.dataframe(df)
 
   def realizar_pedido():
-    id = st.session_state['cliente_id']
-    produtos = View.listar_produtos_nao_disponiveis()
+    id = st.session_state["cliente_id"]
+    produtos = View.produto_listar()
     produto = st.selectbox("Selecione o produto", produtos)
+    
     if st.button("Realizar Pedido"):
       try:
-        View.pedido_inserir( "", id, produto.get_id ())
+        View.pedido_inserir(id, produto)
         st.success("Pedido realizado com sucesso")
         st.rerun()
       except ValueError as error:

@@ -1,5 +1,6 @@
 import json
 
+
 class Pedido:
   def __init__(self, id, id_cliente, id_produto):
     self.set_id(id)
@@ -13,16 +14,9 @@ class Pedido:
   def set_id(self, id): self.__id = id
   def set_id_cliente(self, id_cliente): self.__id_cliente = id_cliente
   def set_id_produto(self, id_produto): self.__id_produto = id_produto
-
-  def __eq__(self, x):
-    if self.__id == x.__id and self.__id_cliente == x.__id_cliente and self.__id_produto == x.__id_produto:
-      return True
-    return False
   
   def __str__(self):
     return f"{self.__id} - {self.__id_cliente} - {self.__id_produto}"
-
-
 
 class NPedido:
   __Pedidos = []
@@ -55,7 +49,6 @@ class NPedido:
     aux = cls.listar_id(obj.get_id())
     if aux is not None:
       aux.set_id_cliente(obj.get_id_cliente())
-      aux.set_id_produto(obj.get_id_produto())
       cls.salvar()
 
   @classmethod
@@ -75,13 +68,13 @@ class NPedido:
                 pedidos_json = json.load(arquivo)
                 for obj in pedidos_json:
                     aux = Pedido( obj["id"], 
-                                  obj["id_cliente"],
-                                  obj["id_produto"],)
+                                  obj["id_produto"],
+                                  obj["id_cliente"])
                     cls.__produtos.append(aux)
         except FileNotFoundError:
             pass
 
   @classmethod
   def salvar(cls):
-    with open("Pedidos.json", mode="w") as arquivo:
+    with open("pedidos.json", mode="w") as arquivo:
       json.dump(cls.__pedidos, arquivo, default=Pedido.to_json)

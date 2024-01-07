@@ -1,5 +1,6 @@
 import json
 
+
 class Item:
     def __init__(self, id, id_produto, id_pedido, preco, qtd ):
         if preco <= 0.00: raise ValueError("preco inválido")
@@ -27,12 +28,12 @@ class Item:
     def set_id_pedido(self, id_pedido): self.__id_produto = id_pedido
 
     def __eq__(self, x):
-     if self.__id == x.__id and self.__nome == x.__titulo and self.__descricao == x.__descricao and self.__preco == x.__preco and self.__quantidade == x.__quantidade:
+     if self.__id == x.__id and self.__nome == x.__titulo  and self.__preco == x.__preco and self.__descricao == x.__descricao and self.__quantidade == x.__quantidade:
       return True
      return 
     
     def __str__(self):
-     return f"{self.__id} - {self.__nome} - {self.__descricao} - {self.__preco} R$ - {self.__quantidade}"
+     return f"{self.__id} - {self.__nome} R$ - {self.__preco} - {self.__descricao} - {self.__quantidade}"
 
 
 

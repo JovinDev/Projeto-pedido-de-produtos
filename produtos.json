@@ -1,1 +1,1 @@
-[{"_Cliente__id": 1, "_Cliente__nome": "admin", "_Cliente__email": "admin", "_Cliente__fone": "0000", "_Cliente__senha": "admin"}, {"_Cliente__id": 2, "_Cliente__nome": "Jo\u00e3o", "_Cliente__email": "vini@gmail.com", "_Cliente__fone": "0000000000000000", "_Cliente__senha": "1234"}]  
+[{"_Produto__id": 1, "_Produto__nome": "qwerqw", "_Produto__preco": 1234.0, "_Produto__descricao": "123441", "_Produto__qtd": 1234412}]

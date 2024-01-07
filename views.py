@@ -47,24 +47,22 @@ class View:
   def produto_listar_id(id):
     return NProduto.listar_id(id)
    
-  def produto_inserir(id_produto, nome, descricao, preco, qtd):
+  def produto_inserir(id_produto, nome, preco, descricao, qtd):
     if nome == "": raise ValueError("Nome vazio")
-    if descricao == "": raise ValueError("Descrição vazia")
     if preco == 0.00: raise ValueError("Preço invalido")
+    if descricao == "": raise ValueError("Descrição vazia")
     if qtd <= 0.00: raise ValueError("Quantidade invalida")
-    NProduto.inserir(Item(0, id_produto, nome, descricao, preco, qtd))
+    NProduto.inserir(Produto(id_produto, nome, preco, descricao, qtd))
 
   def produto_excluir(id):
-    NItem.excluir(Item(id, "", "", 0))
+    NProduto.excluir(Produto(id, "", "", "", "",))
 
-  def produto_atualizar(id, nome, descricao, preco, qtd):
+  def produto_atualizar(id, nome, preco, descricao, qtd):
     if nome == "": raise ValueError("Nome vazio")
-    if descricao == "": raise ValueError("Descrição vazia")
     if preco <= 0.00: raise ValueError("Preço invalido")
+    if descricao == "": raise ValueError("Descrição vazia")
     if qtd <= 0.00: raise ValueError("Quantidade invalida")
-    NProduto.atualizar(Produto(id, nome, descricao, preco, qtd))
-
- 
+    NProduto.atualizar(Produto(id, nome, preco, descricao, qtd))
 
   def pedido_listar_normal():
     return NPedido.listar()
@@ -94,28 +92,24 @@ class View:
   def pedido_listar_id(id):
     return NPedido.listar_id(id)
 
-  def pedido_inserir( id_cliente, id_Produto):
-    produtos = NProduto.listar()
+  def pedido_inserir(id, id_cliente, id_Produto):
+    produtos = View.produto_listar()
     for produto in produtos:
       if id_Produto == produto.get_id():
-        if produto.get_disponivel() == False:
-          produto.set_disponivel(True)
-          NProduto.atualizar(produto) 
-          NPedido.inserir(Pedido(0, id_cliente, id_Produto))
+
+          NPedido.inserir(Pedido(id, id_cliente, id_Produto))
           return
-        else:
+      else:
           raise ValueError("Produto indisponivel")
 
   def pedido_atualizar(id, id_cliente, id_Produto):
     produtos = NProduto.listar()
     for produto in produtos:
       if id_Produto == produto.get_id():
-        if produto.get_disponivel() == False:
-          produto.set_disponivel(True)
           NProduto.atualizar(produto)
           NPedido.atualizar(Pedido(id, id_cliente, id_Produto))
           return
-        else:
+      else:
           raise ValueError("Produto indisponivel")
         
   def pedido_excluir(id):
@@ -133,13 +127,6 @@ class View:
     
     return pedidos
   
-  def listar_produtos_nao_disponiveis():
-    nao_disponivel = []
-    for produto in View.produto_listar():
-      if produto.get_disponivel() == False:
-        nao_disponivel.append(produto)
-    
-    return nao_disponivel
   
   def buscar_produto(titulo):
         produtos_encontrados = []
@@ -160,13 +147,4 @@ class View:
       return resultado
 
         
-  def meus_produtos_de_agora(id_cliente):
-     produtos = []
-     for pedido in View.pedido_listar_normal():
-       if pedido.get_id_cliente() == id_cliente:
-         for produto in View.produto_listar():
-           if produto.get_id() == pedido.get_id_produto() and produto.get_disponivel() == True:
-             produtos.append(produto)
-
-     return produtos
   

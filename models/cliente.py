@@ -1,4 +1,5 @@
 import json
+from models.modelo import Modelo
 import streamlit as st
 
 class Cliente:
@@ -42,7 +43,7 @@ class Cliente:
     return f"{self.__id} - {self.__nome} - {self.__email} - {self.__fone}"
 
 
-class NCliente:
+class NCliente(Modelo):
   __clientes = []  # lista de clientes inicia vazia
 
   @classmethod
