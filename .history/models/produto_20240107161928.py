@@ -28,20 +28,63 @@ class Produto:
   def __str__(self):
      return f"{self.__id} - {self.__nome} - R${self.__preco} - {self.__descricao} - {self.__qtd}"
 
-class NProduto(Modelo):
+class NProduto():
+  __produtos = []
+
+  @classmethod
+  def inserir(cls, obj):
+    cls.abrir()
+    id = 0
+    for aux in cls.__produtos:
+            if aux.get_id() > id: id = aux.get_id()
+    obj.set_id(id + 1)
+    cls.__produtos.append(obj)
+    cls.salvar()
+
+  @classmethod
+  def listar(cls):
+    cls.abrir()
+    return cls.__produtos
+
+  @classmethod
+  def listar_id(cls, id):
+    cls.abrir()
+    for obj in cls.__produtos:
+      if obj.get_id() == id: return obj
+    return None
+
+  @classmethod
+  def atualizar(cls, obj):
+    cls.abrir()
+    aux = cls.listar_id(obj.get_id())
+    if aux is not None:
+      aux.set_nome(obj.get_nome())
+      aux.set_preco(obj.get_preco())
+      aux.set_descricao(obj.get_descricao())
+      aux.set_qtd(obj.get_qtd())
+      cls.salvar()
+
+  @classmethod
+  def excluir(cls, obj):
+    cls.abrir()
+    aux = cls.listar_id(obj.get_id())
+    if aux is not None:
+      cls.__produtos.remove(aux)
+      cls.salvar()
+
   @classmethod
   def abrir(cls):
-    cls.objetos = []
+    cls.__produtos = []
     try:
-      with open("produtos.json", mode="r") as arquivo:
+      with open("produto.json", mode="r") as arquivo:
         produto_json = json.load(arquivo)
         for obj in produto_json:
           aux = Produto(obj["_Produto__id"], obj["_Produto__nome"], obj["_Produto__preco"], obj["_Produto__descricao"],  obj["_Produto__qtd"] )
-          cls.objetos.append(aux)
+          cls.__produtos.append(aux)
     except FileNotFoundError:
       pass
 
   @classmethod
   def salvar(cls):
     with open("produtos.json", mode="w") as arquivo:
-      json.dump(cls.objetos, arquivo, default=vars)
+      json.dump(cls.__produtos, arquivo, default=vars)

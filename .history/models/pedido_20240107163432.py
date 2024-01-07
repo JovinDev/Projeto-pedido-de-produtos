@@ -84,4 +84,4 @@ class NPedido:
   @classmethod
   def salvar(cls):
     with open("pedidos.json", mode="w") as arquivo:
-      json.dump(cls.__Pedidos, arquivo, default=Pedido.to_json)
+      json.dump(cls.__pedidos, arquivo, default=Pedido.to_json)

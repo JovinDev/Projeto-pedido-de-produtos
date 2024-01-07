@@ -15,7 +15,7 @@ class Modelo(ABC):
 
   @classmethod
   def listar(cls):
-    cls.abrir()
+    cls.Abrir()
     return cls.objetos
 
   @classmethod

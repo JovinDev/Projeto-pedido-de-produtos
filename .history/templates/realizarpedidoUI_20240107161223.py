@@ -21,11 +21,12 @@ class RealizarPedidoUI:
   def realizar_pedido():
     id = st.session_state["cliente_id"]
     produtos = View.produto_listar()
+    st.write(produtos)
     produto = st.selectbox("Selecione o produto", produtos)
     
     if st.button("Realizar Pedido"):
       try:
-        View.pedido_inserir(0, id, produto.get_id())
+        View.pedido_inserir(id, produto)
         st.success("Pedido realizado com sucesso")
         st.rerun()
       except ValueError as error:

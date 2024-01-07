@@ -33,7 +33,7 @@ class NProduto(Modelo):
   def abrir(cls):
     cls.objetos = []
     try:
-      with open("produtos.json", mode="r") as arquivo:
+      with open("produto.json", mode="r") as arquivo:
         produto_json = json.load(arquivo)
         for obj in produto_json:
           aux = Produto(obj["_Produto__id"], obj["_Produto__nome"], obj["_Produto__preco"], obj["_Produto__descricao"],  obj["_Produto__qtd"] )
@@ -44,4 +44,4 @@ class NProduto(Modelo):
   @classmethod
   def salvar(cls):
     with open("produtos.json", mode="w") as arquivo:
-      json.dump(cls.objetos, arquivo, default=vars)
+      json.dump(cls.__produtos, arquivo, default=vars)

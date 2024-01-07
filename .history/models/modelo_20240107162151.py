@@ -15,7 +15,7 @@ class Modelo(ABC):
 
   @classmethod
   def listar(cls):
-    cls.abrir()
+    cls.Abrir()
     return cls.objetos
 
   @classmethod
@@ -38,7 +38,7 @@ class Modelo(ABC):
     cls.abrir()
     aux = cls.Listar_Id(obj.get_id())
     cls.objetos.remove(aux)
-    cls.salvar()
+    cls.Salvar()
 
   @abstractclassmethod
   def abrir(cls):

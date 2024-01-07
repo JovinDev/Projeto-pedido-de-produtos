@@ -22,7 +22,7 @@ class Pedido:
      return {
         "id": self.__id,
         "id_cliente": self.__id_cliente,
-        "id_produto": self.__id_produto
+        "id_produto"
      }
 
 class NPedido:
@@ -68,7 +68,7 @@ class NPedido:
 
   @classmethod
   def abrir(cls):
-        cls.__Pedidos = []
+        cls.__produtos = []
 
         try:
             with open("pedidos.json", mode="r") as arquivo:
@@ -77,11 +77,11 @@ class NPedido:
                     aux = Pedido( obj["id"], 
                                   obj["id_produto"],
                                   obj["id_cliente"])
-                    cls.__Pedidos.append(aux)
+                    cls.__produtos.append(aux)
         except FileNotFoundError:
             pass
 
   @classmethod
   def salvar(cls):
     with open("pedidos.json", mode="w") as arquivo:
-      json.dump(cls.__Pedidos, arquivo, default=Pedido.to_json)
+      json.dump(cls.__pedidos, arquivo, default=Pedido.to_json)
