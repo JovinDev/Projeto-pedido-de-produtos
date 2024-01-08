@@ -18,6 +18,6 @@ class BuscarPedidoUsuarioUI:
             if not pedidos_encontrados:
                 st.write("Nenhuma pedido encontrado para o cliente informado.")
             else:
-                dic = [{"ID Pedido": pedido.get_id(), "Cliente": View.cliente_listar_id(pedido.get_id_cliente()).get_nome(), "Produto": View.produto_listar_id(pedido.get_id_filme()).get_nome()} for pedido in pedidos_encontrados]
+                dic = [{"ID Pedido": pedido.get_id(), "Cliente": View.cliente_listar_id(pedido.get_id_cliente()).get_nome(), "Produto": View.produto_listar_id(pedido.get_id_produto()).get_nome()} for pedido in pedidos_encontrados]
                 df = pd.DataFrame(dic)
                 st.dataframe(df)

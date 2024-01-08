@@ -1,8 +1,6 @@
 from models.cliente import Cliente, NCliente
 from models.produto import Produto, NProduto
 from models.pedido import Pedido, NPedido
-from models.item import Item, NItem
-
 
 class View:
   def cliente_inserir(nome, email, fone, senha):

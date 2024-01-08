@@ -1,1 +1,1 @@
-[{"id": 1, "id_cliente": 2, "id_produto": 1, "qtd_itens": 10, "valor_total": 50.0}]
+[{"id": 1, "id_cliente": 2, "id_produto": 1, "qtd_itens": 10, "valor_total": 50.0}, {"id": 2, "id_cliente": 2, "id_produto": 1, "qtd_itens": 1, "valor_total": 5.0}, {"id": 3, "id_cliente": 2, "id_produto": 1, "qtd_itens": 3, "valor_total": 3702.0}, {"id": 4, "id_cliente": 2, "id_produto": 2, "qtd_itens": 3, "valor_total": 369.0}, {"id": 5, "id_cliente": 2, "id_produto": 1, "qtd_itens": 5, "valor_total": 6170.0}]

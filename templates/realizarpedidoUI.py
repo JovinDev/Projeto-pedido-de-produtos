@@ -24,7 +24,7 @@ class RealizarPedidoUI:
     produto = st.selectbox("Selecione o produto", produtos)
     if produto is not None:
       st.write(f"Quantidade disponível: {produto.get_qtd()}")
-      quantidade = st.text_input("Quantidade para pedido:")
+      quantidade = st.text_input("Quantidade de itens que você quer:")
     
     if st.button("Realizar Pedido"):
       try:
