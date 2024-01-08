@@ -121,7 +121,7 @@ class View:
     
     for pedido in View.pedido_listar_normal():
         if pedido.get_id_cliente() == idcliente:
-                pedidos.append(Pedido)
+                pedidos.append(pedido)
     
     return pedidos
   
