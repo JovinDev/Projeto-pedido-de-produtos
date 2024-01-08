@@ -1,1 +1,0 @@
-[{"id": 1, "id_cliente": 2, "id_produto": 1, "qtd_itens": 10, "valor_total": 50.0}, {"id": 2, "id_cliente": 1, "id_produto": 2, "qtd_itens": 10, "valor_total": 50.0}, {"id": 3, "id_cliente": 2, "id_produto": 1, "qtd_itens": 10, "valor_total": 50.0}]
